@@ -21,7 +21,9 @@ describe('Categories Model', () => {
   });
 
   it('can post() a new category', () => {
-    let obj = { name: 'Test Category' };
+    let obj = {
+      name: 'Test Category'
+    };
     return categories.create(obj)
       .then(record => {
         Object.keys(obj).forEach(key => {
@@ -32,7 +34,9 @@ describe('Categories Model', () => {
   });
 
   it('can get() a category', () => {
-    let obj = { name: 'Test Category' };
+    let obj = {
+      name: 'Test Category'
+    };
     return categories.create(obj)
       .then(record => {
         return categories.get(record._id)
@@ -43,5 +47,39 @@ describe('Categories Model', () => {
           });
       });
   });
-
+  //Update category
+  it('can update a category', () => {
+    //Arrange
+    let old = {
+      name: 'Test Category'
+    };
+    let obj = {
+      name: 'JavaScript'
+    };
+    return categories.create(old)
+      .then(record => {
+        return categories.update(record.id, obj)
+          .then(category => {
+            Object.keys(obj).forEach(key => {
+              expect(category[key]).toEqual(obj[key]);
+            });
+          });
+      });
+  });
+  //Delete category
+  it('can delete a category', () => {
+    //Arrange
+    let obj = {
+      name: 'Test Category'
+    };
+    return
+    categories.create(obj)
+      .then(record => {
+        return categories.delete(record.id, obj)
+          .then(category => {})
+        Object.keys(obj).forEach(key => {
+          expect(record[key]);
+        })
+      })
+  });
 });

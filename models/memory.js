@@ -21,6 +21,7 @@ class Model {
   }
 
   update(id, entry) {
+    entry.id = id;
     let record = this.sanitize(entry);
     if (record.id) { this.database = this.database.map((item) => (item.id === id) ? record : item); }
     return Promise.resolve(record);
